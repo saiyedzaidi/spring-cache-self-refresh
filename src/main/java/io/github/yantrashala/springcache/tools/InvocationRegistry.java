@@ -1,4 +1,4 @@
-package com.sapient.engineering.tools.cache;
+package io.github.yantrashala.springcache.tools;
 
 import java.lang.reflect.Method;
 import java.util.Set;
@@ -8,7 +8,7 @@ import java.util.Set;
  * invocations to refresh the cached values
  * 
  * @author Saiyed Zaidi
- * @copyright @2016 Sapient Consulting
+ * @copyright @2016 http://yantrashala.github.io
  * @version 1.0
  */
 public interface InvocationRegistry {

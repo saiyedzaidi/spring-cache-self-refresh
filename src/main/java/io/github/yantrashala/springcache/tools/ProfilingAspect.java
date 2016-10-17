@@ -1,4 +1,4 @@
-package com.sapient.engineering.tools.cache;
+package io.github.yantrashala.springcache.tools;
 
 import java.util.Arrays;
 
@@ -12,7 +12,7 @@ import org.springframework.util.StopWatch;
  * Aspect to profile all methods and log execution times
  * 
  * @author Saiyed Zaidi
- * @copyright @2016 Sapient Consulting
+ * @copyright @2016 http://yantrashala.github.io
  * @version 1.0
  */
 @Component

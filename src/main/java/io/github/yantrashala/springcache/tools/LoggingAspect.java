@@ -1,4 +1,4 @@
-package com.sapient.engineering.tools.cache;
+package io.github.yantrashala.springcache.tools;
 
 import java.util.Arrays;
 import java.util.Map;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component;
  * A simple logging aspect to log the arguments and return values from the configured methods.
  * 
  * @author Saiyed Zaidi
- * @copyright @2016 Sapient Consulting
+ * @copyright @2016 http://yantrashala.github.io
  * @version 1.0
  */
 @Component

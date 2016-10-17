@@ -1,4 +1,4 @@
-package com.sapient.engineering.tools.cache;
+package io.github.yantrashala.springcache.tools;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
@@ -22,7 +22,7 @@ import org.springframework.util.ClassUtils;
  * Aspect to intercept invocation of methods annotated with @Cacheable.
  * 
  * @author Saiyed Zaidi
- * @copyright @2016 Sapient Consulting
+ * @copyright @2016 http://yantrashala.github.io
  * @version 1.0
  */
 @Component

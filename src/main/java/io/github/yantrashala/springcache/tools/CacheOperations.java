@@ -1,4 +1,4 @@
-package com.sapient.engineering.tools.cache;
+package io.github.yantrashala.springcache.tools;
 
 import java.util.Collection;
 
@@ -6,7 +6,7 @@ import java.util.Collection;
  * Provides methods to refresh cached objects.
  * 
  * @author szaidi
- * @copyright @2016 Sapient Consulting
+ * @copyright @2016 http://yantrashala.github.io
  * @version 1.0
  */
 public interface CacheOperations {
