@@ -42,6 +42,9 @@ public class TestCacheOperations {
 	BusinessService businessService;
 
 	@Autowired
+	UnstableBusinessService unstableService;
+
+	@Autowired
 	CacheOperations cacheOperations;
 
 	@Autowired
@@ -81,6 +84,18 @@ public class TestCacheOperations {
 	}
 
 	/**
+	 * Tests cached value retention when business service fails during refresh.
+	 */
+	@Test
+	public void testCacheReloadWithError() {
+		String response1 = unstableService.business("paramx", "paramy");
+		unstableService.setDown(true);
+		cacheOperations.refreshCache(CACHE_NAME);
+		String response2 = unstableService.business("paramx", "paramy");
+		assertEquals(response2, response1);
+	}
+
+	/**
 	 * Uses simple cache setup and default keygenerator to setup Spring cache
 	 * abstraction.
 	 * 
@@ -109,6 +124,13 @@ public class TestCacheOperations {
 			return cacheFactoryBean;
 		}
 
+		/**
+		 * Better to use own Keygenerator instead of default as the default
+		 * ignores the method and class name in the key generation logic. Using
+		 * Default for simplicity.
+		 * 
+		 * @return
+		 */
 		@Bean
 		public KeyGenerator getKeyGenerator() {
 			return new DefaultKeyGenerator();
@@ -122,7 +144,7 @@ public class TestCacheOperations {
  * @author Saiyed Zaidi
  *
  */
-@Component
+@Component("businessService")
 class BusinessServiceImpl implements BusinessService {
 
 	@Cacheable(value = "default")
@@ -133,6 +155,48 @@ class BusinessServiceImpl implements BusinessService {
 
 interface BusinessService {
 	String business(String param1, String param2);
+}
+
+@Component("unstableService")
+class UnstableBusinessServiceImpl implements UnstableBusinessService {
+
+	boolean down = false;
+
+	public void setDown(boolean down) {
+		this.down = down;
+	}
+
+	@Cacheable(value = "default")
+	public String business(String param1, String param2) {
+		if (down) {
+			throw new RuntimeException("Service down");
+		}
+		return "output " + new Random().nextInt();
+	}
+}
+
+/**
+ * An Unstable service that may go down and start throwing exceptions.
+ * 
+ * @author szaidi
+ *
+ */
+interface UnstableBusinessService {
+	/**
+	 * Business as usual
+	 * 
+	 * @param param1
+	 * @param param2
+	 * @return
+	 */
+	String business(String param1, String param2);
+
+	/**
+	 * Set service down status
+	 * 
+	 * @param down
+	 */
+	void setDown(boolean down);
 }
 
 /**
