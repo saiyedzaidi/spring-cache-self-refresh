@@ -108,7 +108,6 @@ public class CacheSupportImpl implements CacheOperations, InvocationRegistry {
 	 * @param cacheNames
 	 */
 	private void updateCache(CachedInvocation invocation, String... cacheNames) {
-		System.out.println("Cachemanager in service"+cacheManager);
 		String[] cacheNamesArray = cacheNames;
 		boolean invocationSuccess;
 		Object computed = null;
@@ -123,7 +122,6 @@ public class CacheSupportImpl implements CacheOperations, InvocationRegistry {
 		
 		for(String cacheName: cacheManager.getCacheNames()){
 			Cache cache = cacheManager.getCache(cacheName);
-			System.out.println(cacheName+"->"+cache.getNativeCache());
 		}
 				
 		if (invocationSuccess) {
